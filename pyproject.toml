@@ -1,0 +1,19 @@
+[project]
+name = "edi-processor"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=1.58.1",
+    "pydantic-ai-slim[openai]>=0.0.15",
+    "pydantic>=2.10.4",
+    "pydantic-ai[logfire]>=0.0.15",
+    "baml-py>=0.70.5",
+    "modal>=0.70.0",
+    "vllm>=0.6.5",
+    "transformers>=4.47.1",
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    "pydantic-settings>=2.7.0",
+]
