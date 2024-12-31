@@ -39,202 +39,617 @@ def all_succeeded(checks: Dict[CheckName, Check]) -> bool:
 
 
 
-class X12Input(BaseModel):
-    release: Literal[5010]
-    transaction_set_id: Literal[835]
-    data: str
-
-class X12Output(BaseModel):
-    release: int
-    transaction_set_id: int
-    data: "X12_835_5010"
-
-class X12_835_5010(BaseModel):
-    ISA_interchange_control_header: "X12_835_5010_ISA_V0"
-    IEA_interchange_control_trailer: "X12_835_5010_IEA_V0"
-    ST_transaction_set_header: Optional["X12_835_5010_ST_V0"] = None
-    BPR_financial_information: "X12_835_5010_BPR_V0"
-    TRN_reassociation_trace_number: "X12_835_5010_TRN_V0"
-    CUR_foreign_currency_information: Optional["X12_835_5010_CUR_V0"] = None
-    REF_receiver_identification: Optional["X12_835_5010_REF_V0"] = None
-    DTM_production_date: Optional["X12_835_5010_DTM_V0"] = None
-    N1_entity_information: List["X12_835_5010_N1_V0"]
-    N2_additional_name_information: List["X12_835_5010_N2_V0"]
-    N3_address_information: List["X12_835_5010_N3_V0"]
-    N4_geographic_location: List["X12_835_5010_N4_V0"]
-    LX_service_line_number: List["X12_835_5010_LX_V0"]
-    CLP_claim_payment_information: List["X12_835_5010_CLP_V0"]
-    NM1_individual_or_organizational_name: List["X12_835_5010_NM1_V0"]
-    MOA_monetary_amount: List["X12_835_5010_MOA_V0"]
-    SVC_service_payment_information: List["X12_835_5010_SVC_V0"]
-    CAS_claim_adjustment: List["X12_835_5010_CAS_V0"]
-    AMT_monetary_amount: List["X12_835_5010_AMT_V0"]
-
-class X12_835_5010_AMT_V0(BaseModel):
+class X12_835_5010_X221A1_Detail_2100_2110_AMT_V0(BaseModel):
     AMT01_amount_qualifier_code: str
-    AMT02_monetary_amount: str
+    AMT02_monetary_amount: float
     AMT03_credit_debit_flag_code: Optional[str] = None
 
-class X12_835_5010_BPR_V0(BaseModel):
-    BPR01_transaction_handling_code: str
-    BPR02_monetary_amount: float
-    BPR03_credit_debit_flag_code: str
-    BPR04_payment_method_code: str
-    BPR05_payment_format_code: Optional[str] = None
-    BPR06_depository_financial_institution_dfi_identification_number_qualifier: Optional[str] = None
-    BPR07_sender_dfi_identifier: Optional[str] = None
-    BPR08_account_number_qualifier: Optional[str] = None
-    BPR09_sender_bank_account_number_09: Optional[str] = None
-    BPR10_payer_identifier: Optional[str] = None
-    BPR11_originating_company_supplemental_code: Optional[str] = None
-    BPR12_originating_company_payment_type_code: Optional[str] = None
-    BPR13_originating_company_payment_type_code: Optional[str] = None
-    BPR14_originating_company_payment_type_code: Optional[str] = None
-    BPR15_originating_company_payment_type_code: Optional[str] = None
-    BPR16_originating_company_payment_type_code: Optional[str] = None
-    BPR17_originating_company_payment_type_code: Optional[str] = None
-    BPR18_originating_company_payment_type_code: Optional[str] = None
-    BPR19_originating_company_payment_type_code: Optional[str] = None
-    BPR20_payment_date: Optional[str] = None
+class X12_835_5010_X221A1_Detail_2100_2110_CAS_V0(BaseModel):
+    CAS01_claim_adjustment_group_code: str
+    CAS02_claim_adjustment_reason_code: str
+    CAS03_monetary_amount: float
+    CAS04_quantity: Optional[float] = None
+    CAS05_claim_adjustment_reason_code: Optional[str] = None
+    CAS06_monetary_amount: Optional[float] = None
+    CAS07_quantity: Optional[float] = None
+    CAS08_claim_adjustment_reason_code: Optional[str] = None
+    CAS09_monetary_amount: Optional[float] = None
+    CAS10_quantity: Optional[float] = None
+    CAS11_claim_adjustment_reason_code: Optional[str] = None
+    CAS12_monetary_amount: Optional[float] = None
+    CAS13_quantity: Optional[float] = None
+    CAS14_claim_adjustment_reason_code: Optional[str] = None
+    CAS15_monetary_amount: Optional[float] = None
+    CAS16_quantity: Optional[float] = None
+    CAS17_claim_adjustment_reason_code: Optional[str] = None
+    CAS18_monetary_amount: Optional[float] = None
+    CAS19_quantity: Optional[float] = None
 
-class X12_835_5010_CAS_V0(BaseModel):
-    CAS01_adjustment_group_code: str
-    CAS02_adjustment_reason_code: str
-    CAS03_adjustment_amount: str
-    CAS04_quantity: Optional[str] = None
-    CAS05_additional_reason_code: Optional[str] = None
-    CAS06_additional_adjustment_amount: Optional[str] = None
-
-class X12_835_5010_CLP_V0(BaseModel):
-    CLP01_patient_control_number: str
-    CLP02_claim_status_code: str
-    CLP03_total_claim_charge_amount: str
-    CLP04_total_claim_payment_amount: str
-    CLP05_patient_responsibility_amount: str
-    CLP06_total_claim_disallowed_amount: Optional[str] = None
-    CLP07_claim_identifier: str
-    CLP08_provider_adjustment_amount: Optional[str] = None
-    CLP09_claim_frequency_code: str
-
-class X12_835_5010_CUR_V0(BaseModel):
-    CUR01_entity_identifier_code: str
-    CUR02_currency_code: str
-    CUR03_exchange_rate: Optional[str] = None
-    CUR04_currency_conversion_type_code: Optional[str] = None
-    CUR05_currency_unit_or_basis: Optional[str] = None
-
-class X12_835_5010_DTM_V0(BaseModel):
+class X12_835_5010_X221A1_Detail_2100_2110_DTM_V0(BaseModel):
     DTM01_date_time_qualifier: str
-    DTM02_date: str
+    DTM02_date: Optional[str] = None
     DTM03_time: Optional[str] = None
+    DTM04_time_code: Optional[str] = None
+    DTM05_date_time_period_format_qualifier: Optional[str] = None
+    DTM06_date_time_period: Optional[str] = None
 
-class X12_835_5010_GE_V0(BaseModel):
-    GE01_number_of_transaction_sets_included: str
-    GE02_group_control_number: str
+class X12_835_5010_X221A1_Detail_2100_2110_LQ_V0(BaseModel):
+    LQ01_code_list_qualifier_code: Optional[str] = None
+    LQ02_industry_code: str
 
-class X12_835_5010_GS_V0(BaseModel):
-    GS01_functional_identifier_code: str
-    GS02_application_sender_code: str
-    GS03_application_receiver_code: str
-    GS04_date: str
-    GS05_time: str
-    GS06_group_control_number: str
-    GS07_responsible_agency_code: str
-    GS08_version_release_code: str
+class X12_835_5010_X221A1_Detail_2100_2110_Loop_V0(BaseModel):
+    SVC_service_payment_information: "X12_835_5010_X221A1_Detail_2100_2110_SVC_V0"
+    DTM_service_date: List["X12_835_5010_X221A1_Detail_2100_2110_DTM_V0"]
+    CAS_service_adjustment: List["X12_835_5010_X221A1_Detail_2100_2110_CAS_V0"]
+    REF_service_identification: List["X12_835_5010_X221A1_Detail_2100_2110_REF_V0"]
+    REF_line_item_control_number: Optional["X12_835_5010_X221A1_Detail_2100_2110_REF_V0"] = None
+    REF_rendering_provider_information: List["X12_835_5010_X221A1_Detail_2100_2110_REF_V0"]
+    REF_healthcare_policy_identification: List["X12_835_5010_X221A1_Detail_2100_2110_REF_V0"]
+    AMT_service_supplemental_amount: List["X12_835_5010_X221A1_Detail_2100_2110_AMT_V0"]
+    QTY_service_supplemental_quantity: List["X12_835_5010_X221A1_Detail_2100_2110_QTY_V0"]
+    LQ_healthcare_remark_codes: List["X12_835_5010_X221A1_Detail_2100_2110_LQ_V0"]
 
-class X12_835_5010_IEA_V0(BaseModel):
-    IEA01_number_of_functional_groups_included: str
-    IEA02_interchange_control_number: str
+class X12_835_5010_X221A1_Detail_2100_2110_QTY_C001_V0(BaseModel):
+    C001_01_unit_or_basis_for_measurement_code: str
+    C001_02_exponent: Optional[float] = None
+    C001_03_multiplier: Optional[float] = None
+    C001_04_unit_or_basis_for_measurement_code: Optional[str] = None
+    C001_05_exponent: Optional[float] = None
+    C001_06_multiplier: Optional[float] = None
+    C001_07_unit_or_basis_for_measurement_code: Optional[str] = None
+    C001_08_exponent: Optional[float] = None
+    C001_09_multiplier: Optional[float] = None
+    C001_10_unit_or_basis_for_measurement_code: Optional[str] = None
+    C001_11_exponent: Optional[float] = None
+    C001_12_multiplier: Optional[float] = None
+    C001_13_unit_or_basis_for_measurement_code: Optional[str] = None
+    C001_14_exponent: Optional[float] = None
+    C001_15_multiplier: Optional[float] = None
 
-class X12_835_5010_ISA_V0(BaseModel):
-    ISA01_authorization_information_qualifier: str
-    ISA02_authorization_information: Optional[str] = None
-    ISA03_security_information_qualifier: str
-    ISA04_security_information: Optional[str] = None
-    ISA05_interchange_id_qualifier_sender: str
-    ISA06_interchange_sender_id: Optional[str] = None
-    ISA07_interchange_id_qualifier_receiver: str
-    ISA08_interchange_receiver_id: str
-    ISA09_interchange_date: str
-    ISA10_interchange_time: str
-    ISA11_repetition_separator: str
-    ISA12_interchange_control_version_number: str
-    ISA13_interchange_control_number: str
-    ISA14_acknowledgment_requested: str
-    ISA15_usage_indicator: str
-    ISA16_component_element_separator: str
+class X12_835_5010_X221A1_Detail_2100_2110_QTY_V0(BaseModel):
+    QTY01_quantity_qualifier: str
+    QTY02_quantity: Optional[float] = None
+    QTY03_composite_unit_of_measure: Optional["X12_835_5010_X221A1_Detail_2100_2110_QTY_C001_V0"] = None
+    QTY04_free_form_information: Optional[str] = None
 
-class X12_835_5010_LX_V0(BaseModel):
-    LX01_assigned_number: str
+class X12_835_5010_X221A1_Detail_2100_2110_REF_C040_V0(BaseModel):
+    C040_01_reference_identification_qualifier: str
+    C040_02_reference_identification: str
+    C040_03_reference_identification_qualifier: Optional[str] = None
+    C040_04_reference_identification: Optional[str] = None
+    C040_05_reference_identification_qualifier: Optional[str] = None
+    C040_06_reference_identification: Optional[str] = None
 
-class X12_835_5010_MOA_V0(BaseModel):
-    MOA01_monetary_amount_qualifier_code: str
-    MOA02_monetary_amount: str
-    MOA03_reference_identification: Optional[str] = None
+class X12_835_5010_X221A1_Detail_2100_2110_REF_V0(BaseModel):
+    REF01_reference_identification_qualifier: str
+    REF02_reference_identification: Optional[str] = None
+    REF03_description: Optional[str] = None
+    REF04_composite_reference_identifier: Optional["X12_835_5010_X221A1_Detail_2100_2110_REF_C040_V0"] = None
 
-class X12_835_5010_N1_V0(BaseModel):
+class X12_835_5010_X221A1_Detail_2100_2110_SVC_C003_V0(BaseModel):
+    C003_01_product_service_id_qualifier: str
+    C003_02_product_service_id: str
+    C003_03_procedure_modifier: Optional[str] = None
+    C003_04_procedure_modifier: Optional[str] = None
+    C003_05_procedure_modifier: Optional[str] = None
+    C003_06_procedure_modifier: Optional[str] = None
+    C003_07_description: Optional[str] = None
+    C003_08_product_service_id: Optional[str] = None
+
+class X12_835_5010_X221A1_Detail_2100_2110_SVC_V0(BaseModel):
+    SVC01_composite_medical_procedure_identifier: "X12_835_5010_X221A1_Detail_2100_2110_SVC_C003_V0"
+    SVC02_submitted_service_charge: float
+    SVC03_paid_service_amount: Optional[float] = None
+    SVC04_revenue_code: Optional[str] = None
+    SVC05_paid_units_of_service: Optional[float] = None
+    SVC06_composite_medical_procedure_identifier: Optional["X12_835_5010_X221A1_Detail_2100_2110_SVC_C003_V0"] = None
+    SVC07_original_submitted_units_of_service: Optional[float] = None
+
+class X12_835_5010_X221A1_Detail_2100_AMT_V0(BaseModel):
+    AMT01_amount_qualifier_code: str
+    AMT02_monetary_amount: float
+    AMT03_credit_debit_flag_code: Optional[str] = None
+
+class X12_835_5010_X221A1_Detail_2100_CAS_V0(BaseModel):
+    CAS01_claim_adjustment_group_code: str
+    CAS02_reason_code: str
+    CAS03_adjustment_amount: float
+    CAS04_adjustment_quantity: Optional[float] = None
+    CAS05_reason_code: Optional[str] = None
+    CAS06_adjustment_amount: Optional[float] = None
+    CAS07_adjustment_quantity: Optional[float] = None
+    CAS08_reason_code: Optional[str] = None
+    CAS09_adjustment_amount: Optional[float] = None
+    CAS10_adjustment_quantity: Optional[float] = None
+    CAS11_reason_code: Optional[str] = None
+    CAS12_adjustment_amount: Optional[float] = None
+    CAS13_adjustment_quantity: Optional[float] = None
+    CAS14_reason_code: Optional[str] = None
+    CAS15_adjustment_amount: Optional[float] = None
+    CAS16_adjustment_quantity: Optional[float] = None
+    CAS17_reason_code: Optional[str] = None
+    CAS18_adjustment_amount: Optional[float] = None
+    CAS19_adjustment_quantity: Optional[float] = None
+
+class X12_835_5010_X221A1_Detail_2100_CLP_V0(BaseModel):
+    CLP01_claim_submitters_identifier: str
+    CLP02_claim_status_code: str
+    CLP03_submitted_charges_amount: float
+    CLP04_paid_amount: float
+    CLP05_patient_responsibility_amount: Optional[float] = None
+    CLP06_claim_filing_indicator_code: Optional[str] = None
+    CLP07_payer_control_number: Optional[str] = None
+    CLP08_facility_code_value: Optional[str] = None
+    CLP09_claim_frequency_type_code: Optional[str] = None
+    CLP10_patient_status_code: Optional[str] = None
+    CLP11_drg_code: Optional[str] = None
+    CLP12_drg_weight: Optional[float] = None
+    CLP13_discharge_fraction: Optional[float] = None
+    CLP14_patient_authorization_to_coordinate_benefits: Optional[str] = None
+
+class X12_835_5010_X221A1_Detail_2100_DTM_V0(BaseModel):
+    DTM01_date_time_qualifier: str
+    DTM02_date: Optional[str] = None
+    DTM03_time: Optional[str] = None
+    DTM04_time_code: Optional[str] = None
+    DTM05_date_time_period_format_qualifier: Optional[str] = None
+    DTM06_date_time_period: Optional[str] = None
+
+class X12_835_5010_X221A1_Detail_2100_Loop_V0(BaseModel):
+    CLP_claim_payment_information: "X12_835_5010_X221A1_Detail_2100_CLP_V0"
+    CAS_claim_adjustments: List["X12_835_5010_X221A1_Detail_2100_CAS_V0"]
+    NM1_patient_name: "X12_835_5010_X221A1_Detail_2100_NM1_V0"
+    NM1_insured_name: Optional["X12_835_5010_X221A1_Detail_2100_NM1_V0"] = None
+    NM1_corrected_patient_or_insured_name: Optional["X12_835_5010_X221A1_Detail_2100_NM1_V0"] = None
+    NM1_service_provider_name: Optional["X12_835_5010_X221A1_Detail_2100_NM1_V0"] = None
+    NM1_crossover_carrier_name: Optional["X12_835_5010_X221A1_Detail_2100_NM1_V0"] = None
+    NM1_corrected_priority_payer_name: Optional["X12_835_5010_X221A1_Detail_2100_NM1_V0"] = None
+    NM1_other_subscriber_name: Optional["X12_835_5010_X221A1_Detail_2100_NM1_V0"] = None
+    MIA_inpatient_adjudication_information: Optional["X12_835_5010_X221A1_Detail_2100_MIA_V0"] = None
+    MOA_outpatient_adjudication_information: Optional["X12_835_5010_X221A1_Detail_2100_MOA_V0"] = None
+    REF_other_claim_related_identification: List["X12_835_5010_X221A1_Detail_2100_REF_V0"]
+    REF_rendering_provider_identification: List["X12_835_5010_X221A1_Detail_2100_REF_V0"]
+    DTM_statement_from_to_date: List["X12_835_5010_X221A1_Detail_2100_DTM_V0"]
+    DTM_coverage_expiration_date: Optional["X12_835_5010_X221A1_Detail_2100_DTM_V0"] = None
+    DTM_claim_received_date: Optional["X12_835_5010_X221A1_Detail_2100_DTM_V0"] = None
+    PER_claim_contact_information: List["X12_835_5010_X221A1_Detail_2100_PER_V0"]
+    AMT_claim_supplemental_information: List["X12_835_5010_X221A1_Detail_2100_AMT_V0"]
+    QTY_claim_supplemental_information_quantity: List["X12_835_5010_X221A1_Detail_2100_QTY_V0"]
+    service_line_loop: List["X12_835_5010_X221A1_Detail_2100_2110_Loop_V0"]
+
+class X12_835_5010_X221A1_Detail_2100_MIA_V0(BaseModel):
+    MIA01_covered_days: float
+    MIA02_pps_operating_outlier_amount: Optional[float] = None
+    MIA03_lifetime_psychiatric_days: Optional[float] = None
+    MIA04_drg_amount: Optional[float] = None
+    MIA05_claim_payment_remark_code: Optional[str] = None
+    MIA06_disproportionate_share_amount: Optional[float] = None
+    MIA07_msp_pass_through_amount: Optional[float] = None
+    MIA08_total_pps_capital_amount: Optional[float] = None
+    MIA09_pps_capital_federal_specific_drg_amount: Optional[float] = None
+    MIA10_pps_capital_hospital_specific_drg_amount: Optional[float] = None
+    MIA11_pps_capital_disproportionate_share_drg_amount: Optional[float] = None
+    MIA12_old_capital_amount: Optional[float] = None
+    MIA13_pps_capital_indirect_medical_education_claim_amount: Optional[float] = None
+    MIA14_hospital_specific_drg_amount: Optional[float] = None
+    MIA15_cost_report_days: Optional[float] = None
+    MIA16_federal_specific_drg_amount: Optional[float] = None
+    MIA17_pps_capital_outlier_amount: Optional[float] = None
+    MIA18_indirect_teaching_amount: Optional[float] = None
+    MIA19_professional_component_amount_billed_but_not_payable: Optional[float] = None
+    MIA20_claim_payment_remark_code_1: Optional[str] = None
+    MIA21_claim_payment_remark_code_2: Optional[str] = None
+    MIA22_claim_payment_remark_code_3: Optional[str] = None
+    MIA23_claim_payment_remark_code_4: Optional[str] = None
+    MIA24_capital_exception_amount: Optional[float] = None
+
+class X12_835_5010_X221A1_Detail_2100_MOA_V0(BaseModel):
+    MOA01_reimbursement_rate: Optional[float] = None
+    MOA02_hcpcs_payable_amount: Optional[float] = None
+    MOA03_claim_payment_remark_code_1: Optional[str] = None
+    MOA04_claim_payment_remark_code_2: Optional[str] = None
+    MOA05_claim_payment_remark_code_3: Optional[str] = None
+    MOA06_claim_payment_remark_code_4: Optional[str] = None
+    MOA07_claim_payment_remark_code_5: Optional[str] = None
+    MOA08_esrd_payment_amount: Optional[float] = None
+    MOA09_professional_component_amount_billed_but_not_payable: Optional[float] = None
+
+class X12_835_5010_X221A1_Detail_2100_NM1_V0(BaseModel):
+    NM101_entity_identifier_code: str
+    NM102_entity_type_qualifier: str
+    NM103_name_last_or_organization_name: Optional[str] = None
+    NM104_name_first: Optional[str] = None
+    NM105_name_middle: Optional[str] = None
+    NM106_name_prefix: Optional[str] = None
+    NM107_name_suffix: Optional[str] = None
+    NM108_identification_code_qualifier: Optional[str] = None
+    NM109_identification_code: Optional[str] = None
+    NM110_entity_relationship_code: Optional[str] = None
+    NM111_additional_entity_identifier_code: Optional[str] = None
+    NM112_secondary_name_last_or_organization_name: Optional[str] = None
+
+class X12_835_5010_X221A1_Detail_2100_PER_V0(BaseModel):
+    PER01_contact_function_code: str
+    PER02_name: Optional[str] = None
+    PER03_communication_number_qualifier_1: Optional[str] = None
+    PER04_communication_number_1: Optional[str] = None
+    PER05_communication_number_qualifier_2: Optional[str] = None
+    PER06_communication_number_2: Optional[str] = None
+    PER07_communication_number_qualifier_3: Optional[str] = None
+    PER08_communication_number_3: Optional[str] = None
+    PER09_contact_inquiry_reference: Optional[str] = None
+
+class X12_835_5010_X221A1_Detail_2100_QTY_C001_V0(BaseModel):
+    C001_01_unit_or_basis_for_measurement_code: str
+    C001_02_exponent: Optional[float] = None
+    C001_03_multiplier: Optional[float] = None
+    C001_04_unit_or_basis_for_measurement_code: Optional[str] = None
+    C001_05_exponent: Optional[float] = None
+    C001_06_multiplier: Optional[float] = None
+    C001_07_unit_or_basis_for_measurement_code: Optional[str] = None
+    C001_08_exponent: Optional[float] = None
+    C001_09_multiplier: Optional[float] = None
+    C001_10_unit_or_basis_for_measurement_code: Optional[str] = None
+    C001_11_exponent: Optional[float] = None
+    C001_12_multiplier: Optional[float] = None
+    C001_13_unit_or_basis_for_measurement_code: Optional[str] = None
+    C001_14_exponent: Optional[float] = None
+    C001_15_multiplier: Optional[float] = None
+
+class X12_835_5010_X221A1_Detail_2100_QTY_V0(BaseModel):
+    QTY01_quantity_qualifier: str
+    QTY02_quantity: Optional[float] = None
+    QTY03_composite_unit_of_measure: Optional["X12_835_5010_X221A1_Detail_2100_QTY_C001_V0"] = None
+    QTY04_free_form_information: Optional[str] = None
+
+class X12_835_5010_X221A1_Detail_2100_REF_C040_V0(BaseModel):
+    C040_01_reference_identification_qualifier: str
+    C040_02_reference_identification: str
+    C040_03_reference_identification_qualifier: Optional[str] = None
+    C040_04_reference_identification: Optional[str] = None
+    C040_05_reference_identification_qualifier: Optional[str] = None
+    C040_06_reference_identification: Optional[str] = None
+
+class X12_835_5010_X221A1_Detail_2100_REF_V0(BaseModel):
+    REF01_reference_identification_qualifier: str
+    REF02_reference_identification: Optional[str] = None
+    REF03_description: Optional[str] = None
+    REF04_composite_reference_identifier: Optional["X12_835_5010_X221A1_Detail_2100_REF_C040_V0"] = None
+
+class X12_835_5010_X221A1_Detail_LX_V0(BaseModel):
+    LX01_assigned_number: int
+
+class X12_835_5010_X221A1_Detail_Loop_V0(BaseModel):
+    LX_header_number: "X12_835_5010_X221A1_Detail_LX_V0"
+    TS3_provider_summary_information: Optional["X12_835_5010_X221A1_Detail_TS3_V0"] = None
+    TS2_provider_supplemental_summary_information: Optional["X12_835_5010_X221A1_Detail_TS2_V0"] = None
+    claim_level_loop: List["X12_835_5010_X221A1_Detail_2100_Loop_V0"]
+
+class X12_835_5010_X221A1_Detail_TS2_V0(BaseModel):
+    TS201_total_drg_amount: Optional[float] = None
+    TS202_total_federal_specific_amount: Optional[float] = None
+    TS203_total_hospital_specific_amount: Optional[float] = None
+    TS204_total_disproportionate_share_amount: Optional[float] = None
+    TS205_total_capital_amount: Optional[float] = None
+    TS206_total_indirect_medical_education_amount: Optional[float] = None
+    TS207_total_outlier_days: Optional[float] = None
+    TS208_total_day_outlier_amount: Optional[float] = None
+    TS209_total_cost_outlier_amount: Optional[float] = None
+    TS210_drg_average_length_of_stay: Optional[float] = None
+    TS211_total_discharges: Optional[float] = None
+    TS212_total_cost_report_days: Optional[float] = None
+    TS213_total_covered_days: Optional[float] = None
+    TS214_total_non_covered_days: Optional[float] = None
+    TS215_total_msp_pass_through_amount: Optional[float] = None
+    TS216_average_drg_weight: Optional[float] = None
+    TS217_total_pps_capital_federal_specific_drg_amount: Optional[float] = None
+    TS218_total_pps_capital_hospital_specific_drg_amount: Optional[float] = None
+    TS219_total_pps_disproportionate_share_drg_amount: Optional[float] = None
+
+class X12_835_5010_X221A1_Detail_TS3_V0(BaseModel):
+    TS301_reference_identification: str
+    TS302_facility_code_value: str
+    TS303_date: str
+    TS304_quantity: float
+    TS305_total_reported_charges: float
+    TS306_total_covered_charges: Optional[float] = None
+    TS307_total_noncovered_charges: Optional[float] = None
+    TS308_total_denied_charges: Optional[float] = None
+    TS309_total_provider_payment: Optional[float] = None
+    TS310_total_interest_paid: Optional[float] = None
+    TS311_total_contractual_adjustment: Optional[float] = None
+    TS312_total_gramm_rudman_reduction: Optional[float] = None
+    TS313_total_medicare_secondary_payer_primary_payer_amount: Optional[float] = None
+    TS314_total_blood_deductible_amount: Optional[float] = None
+    TS315_total_non_lab_charges: Optional[float] = None
+    TS316_total_coinsurance_amount: Optional[float] = None
+    TS317_hcpcs_reported_charges: Optional[float] = None
+    TS318_hcpcs_payable_amount: Optional[float] = None
+    TS319_total_deductible_amount: Optional[float] = None
+    TS320_total_professional_component_amount: Optional[float] = None
+    TS321_total_msp_patient_liability_met: Optional[float] = None
+    TS322_total_patient_reimbursement: Optional[float] = None
+    TS323_total_pip_number_of_claims: Optional[float] = None
+    TS324_total_pip_adjustment: Optional[float] = None
+
+class X12_835_5010_X221A1_Extractor_Input_V0(BaseModel):
+    body: str
+
+class X12_835_5010_X221A1_Extractor_Output_V0(BaseModel):
+    data: "X12_835_5010_X221A1_Extractor_Schema_V0"
+
+class X12_835_5010_X221A1_Extractor_Schema_V0(BaseModel):
+    heading: "X12_835_5010_X221A1_Heading"
+    detail: List["X12_835_5010_X221A1_Detail_Loop_V0"]
+    summary: "X12_835_5010_X221A1_Summary_V0"
+
+class X12_835_5010_X221A1_Heading(BaseModel):
+    ST_transaction_set_header: "X12_835_5010_X221A1_Heading_ST_V0"
+    BPR_financial_information: "X12_835_5010_X221A1_Heading_BPR_V0"
+    TRN_reassociation_trace_number: Optional["X12_835_5010_X221A1_Heading_TRN_V0"] = None
+    CUR_currency: Optional["X12_835_5010_X221A1_Heading_CUR_V0"] = None
+    REF_receiver_identification: Optional["X12_835_5010_X221A1_Heading_REF_V0"] = None
+    REF_version_identification: Optional["X12_835_5010_X221A1_Heading_REF_V0"] = None
+    DTM_production_date: Optional["X12_835_5010_X221A1_Heading_DTM_V0"] = None
+    payer_identification_loop: List["X12_835_5010_X221A1_Heading_1000A_Loop_V0"]
+    payee_identification_loop: List["X12_835_5010_X221A1_Heading_1000B_Loop_V0"]
+
+class X12_835_5010_X221A1_Heading_1000A_Loop_V0(BaseModel):
+    N1_payer_identification: "X12_835_5010_X221A1_Heading_1000A_N1_V0"
+    N3_payer_address: "X12_835_5010_X221A1_Heading_1000A_N3_V0"
+    N4_payer_city_state_zip_code: "X12_835_5010_X221A1_Heading_1000A_N4_V0"
+    REF_additional_payer_identification: List["X12_835_5010_X221A1_Heading_1000A_REF_V0"]
+    PER_payer_business_contact_information: Optional["X12_835_5010_X221A1_Heading_1000A_PER_V0"] = None
+    PER_payer_technical_contact_information: List["X12_835_5010_X221A1_Heading_1000A_PER_V0"]
+    PER_payer_web_site: Optional["X12_835_5010_X221A1_Heading_1000A_PER_V0"] = None
+
+class X12_835_5010_X221A1_Heading_1000A_N1_V0(BaseModel):
     N101_entity_identifier_code: str
     N102_name: Optional[str] = None
     N103_identification_code_qualifier: Optional[str] = None
     N104_identification_code: Optional[str] = None
+    N105_entity_relationship_code: Optional[str] = None
+    N106_entity_identifier_code: Optional[str] = None
 
-class X12_835_5010_N2_V0(BaseModel):
-    N201_name: str
-    N202_name: Optional[str] = None
-
-class X12_835_5010_N3_V0(BaseModel):
+class X12_835_5010_X221A1_Heading_1000A_N3_V0(BaseModel):
     N301_address_information: str
     N302_address_information: Optional[str] = None
 
-class X12_835_5010_N4_V0(BaseModel):
-    N401_city_name: str
+class X12_835_5010_X221A1_Heading_1000A_N4_V0(BaseModel):
+    N401_city_name: Optional[str] = None
     N402_state_or_province_code: Optional[str] = None
     N403_postal_code: Optional[str] = None
     N404_country_code: Optional[str] = None
     N405_location_qualifier: Optional[str] = None
     N406_location_identifier: Optional[str] = None
+    N407_country_subdivision_code: Optional[str] = None
 
-class X12_835_5010_NM1_V0(BaseModel):
-    NM101_entity_identifier_code: str
-    NM102_entity_type_qualifier: str
-    NM103_last_name_or_organization_name: str
-    NM104_first_name: Optional[str] = None
-    NM105_middle_initial: Optional[str] = None
-    NM106_name_prefix: Optional[str] = None
-    NM107_name_suffix: Optional[str] = None
-    NM108_identification_code_qualifier: str
-    NM109_identification_code: str
-
-class X12_835_5010_PER_V0(BaseModel):
+class X12_835_5010_X221A1_Heading_1000A_PER_V0(BaseModel):
     PER01_contact_function_code: str
-    PER02_contact_name: Optional[str] = None
-    PER03_communication_number_qualifier: Optional[str] = None
-    PER04_communication_number: Optional[str] = None
-    PER05_communication_number_qualifier: Optional[str] = None
-    PER06_communication_number: Optional[str] = None
+    PER02_name: Optional[str] = None
+    PER03_communication_number_qualifier_1: Optional[str] = None
+    PER04_communication_number_1: Optional[str] = None
+    PER05_communication_number_qualifier_2: Optional[str] = None
+    PER06_communication_number_2: Optional[str] = None
+    PER07_communication_number_qualifier_3: Optional[str] = None
+    PER08_communication_number_3: Optional[str] = None
+    PER09_contact_inquiry_reference: Optional[str] = None
 
-class X12_835_5010_REF_V0(BaseModel):
+class X12_835_5010_X221A1_Heading_1000A_REF_C040_V0(BaseModel):
+    C040_01_reference_identification_qualifier: str
+    C040_02_reference_identification: str
+    C040_03_reference_identification_qualifier: Optional[str] = None
+    C040_04_reference_identification: Optional[str] = None
+    C040_05_reference_identification_qualifier: Optional[str] = None
+    C040_06_reference_identification: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_1000A_REF_V0(BaseModel):
     REF01_reference_identification_qualifier: str
-    REF02_reference_identification: str
+    REF02_reference_identification: Optional[str] = None
     REF03_description: Optional[str] = None
+    REF04_composite_reference_identifier: Optional["X12_835_5010_X221A1_Heading_1000A_REF_C040_V0"] = None
 
-class X12_835_5010_SE_V0(BaseModel):
-    SE01_segment_count: str
-    SE02_transaction_set_control_number: str
+class X12_835_5010_X221A1_Heading_1000B_Loop_V0(BaseModel):
+    N1_payee_identification: "X12_835_5010_X221A1_Heading_1000B_N1_V0"
+    N3_payee_address: Optional["X12_835_5010_X221A1_Heading_1000B_N3_V0"] = None
+    N4_payee_city_state_zip_code: Optional["X12_835_5010_X221A1_Heading_1000B_N4_V0"] = None
+    REF_payee_additional_identification: List["X12_835_5010_X221A1_Heading_1000B_REF_V0"]
+    RDM_remittance_delivery_method: Optional["X12_835_5010_X221A1_Heading_1000B_RDM_V0"] = None
 
-class X12_835_5010_ST_V0(BaseModel):
+class X12_835_5010_X221A1_Heading_1000B_N1_V0(BaseModel):
+    N101_entity_identifier_code: str
+    N102_name: Optional[str] = None
+    N103_identification_code_qualifier: Optional[str] = None
+    N104_identification_code: Optional[str] = None
+    N105_entity_relationship_code: Optional[str] = None
+    N106_entity_identifier_code: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_1000B_N3_V0(BaseModel):
+    N301_address_information: str
+    N302_address_information: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_1000B_N4_V0(BaseModel):
+    N401_city_name: Optional[str] = None
+    N402_state_or_province_code: Optional[str] = None
+    N403_postal_code: Optional[str] = None
+    N404_country_code: Optional[str] = None
+    N405_location_qualifier: Optional[str] = None
+    N406_location_identifier: Optional[str] = None
+    N407_country_subdivision_code: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_1000B_RDM_C040_V0(BaseModel):
+    C040_01_reference_identification_qualifier: str
+    C040_02_reference_identification: str
+    C040_03_reference_identification_qualifier: Optional[str] = None
+    C040_04_reference_identification: Optional[str] = None
+    C040_05_reference_identification_qualifier: Optional[str] = None
+    C040_06_reference_identification: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_1000B_RDM_V0(BaseModel):
+    RDM01_report_transmission_code: str
+    RDM02_name: Optional[str] = None
+    RDM03_communication_number: Optional[str] = None
+    RDM04_composite_reference_identifier: Optional["X12_835_5010_X221A1_Heading_1000B_RDM_C040_V0"] = None
+    RDM05_composite_reference_identifier: Optional["X12_835_5010_X221A1_Heading_1000B_RDM_C040_V0"] = None
+
+class X12_835_5010_X221A1_Heading_1000B_REF_C040_V0(BaseModel):
+    C040_01_reference_identification_qualifier: str
+    C040_02_reference_identification: str
+    C040_03_reference_identification_qualifier: Optional[str] = None
+    C040_04_reference_identification: Optional[str] = None
+    C040_05_reference_identification_qualifier: Optional[str] = None
+    C040_06_reference_identification: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_1000B_REF_V0(BaseModel):
+    REF01_reference_identification_qualifier: str
+    REF02_reference_identification: Optional[str] = None
+    REF03_description: Optional[str] = None
+    REF04_composite_reference_identifier: Optional["X12_835_5010_X221A1_Heading_1000B_REF_C040_V0"] = None
+
+class X12_835_5010_X221A1_Heading_BPR_V0(BaseModel):
+    BPR01_transaction_handling_code: str
+    BPR02_monetary_amount: float
+    BPR03_credit_debit_flag_code: str
+    BPR04_payment_method_code: str
+    BPR05_payment_format_code: Optional[str] = None
+    BPR06_dfi_id_number_qualifier: Optional[str] = None
+    BPR07_dfi_identification_number: Optional[str] = None
+    BPR08_account_number_qualifier: Optional[str] = None
+    BPR09_account_number: Optional[str] = None
+    BPR10_originating_company_identifier: Optional[str] = None
+    BPR11_originating_company_supplemental_code: Optional[str] = None
+    BPR12_dfi_id_number_qualifier_receiver: Optional[str] = None
+    BPR13_dfi_identification_number_receiver: Optional[str] = None
+    BPR14_account_number_qualifier_receiver: Optional[str] = None
+    BPR15_account_number_receiver: Optional[str] = None
+    BPR16_date: Optional[str] = None
+    BPR17_business_function_code: Optional[str] = None
+    BPR18_dfi_id_number_qualifier_return: Optional[str] = None
+    BPR19_dfi_identification_number_return: Optional[str] = None
+    BPR20_account_number_qualifier_return: Optional[str] = None
+    BPR21_account_number_return: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_CUR_V0(BaseModel):
+    CUR01_entity_identifier_code: str
+    CUR02_currency_code: str
+    CUR03_exchange_rate: Optional[float] = None
+    CUR04_entity_identifier_code: Optional[str] = None
+    CUR05_secondary_currency_code: Optional[str] = None
+    CUR06_currency_market_exchange_code: Optional[str] = None
+    CUR07_date_time_qualifier: Optional[str] = None
+    CUR08_date: Optional[str] = None
+    CUR09_time: Optional[str] = None
+    CUR10_secondary_date_time_qualifier: Optional[str] = None
+    CUR11_secondary_date: Optional[str] = None
+    CUR12_secondary_time: Optional[str] = None
+    CUR13_additional_date_time_qualifier: Optional[str] = None
+    CUR14_additional_date: Optional[str] = None
+    CUR15_additional_time: Optional[str] = None
+    CUR16_final_date_time_qualifier: Optional[str] = None
+    CUR17_final_date: Optional[str] = None
+    CUR18_final_time: Optional[str] = None
+    CUR19_last_date_time_qualifier: Optional[str] = None
+    CUR20_last_date: Optional[str] = None
+    CUR21_last_time: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_DTM_V0(BaseModel):
+    DTM01_date_time_qualifier: str
+    DTM02_date: Optional[str] = None
+    DTM03_time: Optional[str] = None
+    DTM04_time_code: Optional[str] = None
+    DTM05_date_time_period_format_qualifier: Optional[str] = None
+    DTM06_date_time_period: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_REF_C040_V0(BaseModel):
+    C040_01_reference_id_qualifier: str
+    C040_02_reference_id: str
+    C040_03_secondary_reference_id_qualifier: Optional[str] = None
+    C040_04_secondary_reference_id: Optional[str] = None
+    C040_05_tertiary_reference_id_qualifier: Optional[str] = None
+    C040_06_tertiary_reference_id: Optional[str] = None
+
+class X12_835_5010_X221A1_Heading_REF_V0(BaseModel):
+    REF01_reference_id_qualifier: str
+    REF02_reference_id: Optional[str] = None
+    REF03_description: Optional[str] = None
+    REF04_composite_reference_identifier: Optional["X12_835_5010_X221A1_Heading_REF_C040_V0"] = None
+
+class X12_835_5010_X221A1_Heading_ST_V0(BaseModel):
     ST01_transaction_set_identifier_code: str
     ST02_transaction_set_control_number: str
+    ST03_implementation_convention_reference: Optional[str] = None
 
-class X12_835_5010_SVC_V0(BaseModel):
-    SVC01_composite_medical_procedure_identifier: str
-    SVC02_line_item_charge_amount: str
-    SVC03_line_item_payment_amount: str
-    SVC04_service_quantity: Optional[str] = None
-    SVC05_composite_medical_procedure_identifier: Optional[str] = None
+class X12_835_5010_X221A1_Heading_TRN_V0(BaseModel):
+    TRN01_trace_type_code: str
+    TRN02_reference_identification: str
+    TRN03_originating_company_identifier: Optional[str] = None
+    TRN04_reference_identification: Optional[str] = None
 
-class X12_835_5010_TRN_V0(BaseModel):
-    TNR01_trace_type_code: str
-    TNR03_check_or_eft_trace_number: str
-    TNR03_payer_identifier: Optional[str] = None
-    TRN04_originating_company_supplemental_code: Optional[str] = None
+class X12_835_5010_X221A1_Judge_Input_V0(BaseModel):
+    extraction: "X12_835_5010_X221A1_Extractor_Output_V0"
+
+class X12_835_5010_X221A1_Judge_Output_V0(BaseModel):
+    data: "X12_835_5010_X221A1_Judge_Schema"
+
+class X12_835_5010_X221A1_Judge_Schema(BaseModel):
+    status: Union[Literal["failed"], Literal["passed"]]
+    message: Optional[str] = None
+    errors: List["X12_835_5010_X221A1_Judge_Schema_Error"]
+    summary: "X12_835_5010_X221A1_Judge_Schema_Summary"
+
+class X12_835_5010_X221A1_Judge_Schema_Error(BaseModel):
+    extractor_id: str
+    segment: str
+    element: str
+    issue: str
+    description: str
+
+class X12_835_5010_X221A1_Judge_Schema_Summary(BaseModel):
+    total_extractions: int
+    total_errors: int
+    extraction_status: Union[Literal["valid"], Literal["invalid"]]
+
+class X12_835_5010_X221A1_Summary_PLB_C042_V0(BaseModel):
+    adjustment_reason_code: str
+    reference_identification: Optional[str] = None
+
+class X12_835_5010_X221A1_Summary_PLB_V0(BaseModel):
+    PLB01_provider_identifier: str
+    PLB02_fiscal_period_date: str
+    PLB03_adjustment_identifier: "X12_835_5010_X221A1_Summary_PLB_C042_V0"
+    PLB04_adjustment_amount: float
+    PLB05_adjustment_identifier: Optional["X12_835_5010_X221A1_Summary_PLB_C042_V0"] = None
+    PLB06_adjustment_amount: Optional[float] = None
+    PLB07_adjustment_identifier: Optional["X12_835_5010_X221A1_Summary_PLB_C042_V0"] = None
+    PLB08_adjustment_amount: Optional[float] = None
+    PLB09_adjustment_identifier: Optional["X12_835_5010_X221A1_Summary_PLB_C042_V0"] = None
+    PLB10_adjustment_amount: Optional[float] = None
+    PLB11_adjustment_identifier: Optional["X12_835_5010_X221A1_Summary_PLB_C042_V0"] = None
+    PLB12_adjustment_amount: Optional[float] = None
+    PLB13_adjustment_identifier: Optional["X12_835_5010_X221A1_Summary_PLB_C042_V0"] = None
+    PLB14_adjustment_amount: Optional[float] = None
+
+class X12_835_5010_X221A1_Summary_SE_V0(BaseModel):
+    SE01_number_of_included_segments: int
+    SE02_transaction_set_control_number: str
+
+class X12_835_5010_X221A1_Summary_V0(BaseModel):
+    PLB_provider_adjustments: List["X12_835_5010_X221A1_Summary_PLB_V0"]
+    SE_transaction_set_trailer: "X12_835_5010_X221A1_Summary_SE_V0"
+
+class X12_835_5010_X221A1_Validator_Input_V0(BaseModel):
+    body: str
+
+class X12_835_5010_X221A1_Validator_Output_V0(BaseModel):
+    data: "X12_835_5010_X221A1_Validator_Schema"
+
+class X12_835_5010_X221A1_Validator_Schema(BaseModel):
+    status: Union[Literal["failed"], Literal["passed"]]
+    message: Optional[str] = None
+    errors: List["X12_835_5010_X221A1_Validator_Schema_Errors"]
+
+class X12_835_5010_X221A1_Validator_Schema_Errors(BaseModel):
+    segment: str
+    element: str
+    issue: str
+    description: str

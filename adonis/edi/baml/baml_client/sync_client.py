@@ -47,11 +47,11 @@ class BamlSyncClient:
       return self.__stream_client
 
     
-    def X12Extractor(
+    def X12_835_5010_X221A1_Extractor(
         self,
-        params: types.X12Input,
+        params: types.X12_835_5010_X221A1_Extractor_Input_V0,
         baml_options: BamlCallOptions = {},
-    ) -> types.X12Output:
+    ) -> types.X12_835_5010_X221A1_Extractor_Output_V0:
       __tb__ = baml_options.get("tb", None)
       if __tb__ is not None:
         tb = __tb__._tb # type: ignore (we know how to use this private attribute)
@@ -60,7 +60,7 @@ class BamlSyncClient:
       __cr__ = baml_options.get("client_registry", None)
 
       raw = self.__runtime.call_function_sync(
-        "X12Extractor",
+        "X12_835_5010_X221A1_Extractor",
         {
           "params": params,
         },
@@ -68,7 +68,53 @@ class BamlSyncClient:
         tb,
         __cr__,
       )
-      return cast(types.X12Output, raw.cast_to(types, types))
+      return cast(types.X12_835_5010_X221A1_Extractor_Output_V0, raw.cast_to(types, types))
+    
+    def X12_835_5010_X221A1_Judge(
+        self,
+        params: types.X12_835_5010_X221A1_Judge_Input_V0,
+        baml_options: BamlCallOptions = {},
+    ) -> types.X12_835_5010_X221A1_Judge_Output_V0:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      raw = self.__runtime.call_function_sync(
+        "X12_835_5010_X221A1_Judge",
+        {
+          "params": params,
+        },
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+      return cast(types.X12_835_5010_X221A1_Judge_Output_V0, raw.cast_to(types, types))
+    
+    def X12_835_5010_X221A1_Validator(
+        self,
+        params: types.X12_835_5010_X221A1_Validator_Input_V0,
+        baml_options: BamlCallOptions = {},
+    ) -> types.X12_835_5010_X221A1_Validator_Output_V0:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      raw = self.__runtime.call_function_sync(
+        "X12_835_5010_X221A1_Validator",
+        {
+          "params": params,
+        },
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+      return cast(types.X12_835_5010_X221A1_Validator_Output_V0, raw.cast_to(types, types))
     
 
 
@@ -82,11 +128,11 @@ class BamlStreamClient:
       self.__ctx_manager = ctx_manager
 
     
-    def X12Extractor(
+    def X12_835_5010_X221A1_Extractor(
         self,
-        params: types.X12Input,
+        params: types.X12_835_5010_X221A1_Extractor_Input_V0,
         baml_options: BamlCallOptions = {},
-    ) -> baml_py.BamlSyncStream[partial_types.X12Output, types.X12Output]:
+    ) -> baml_py.BamlSyncStream[partial_types.X12_835_5010_X221A1_Extractor_Output_V0, types.X12_835_5010_X221A1_Extractor_Output_V0]:
       __tb__ = baml_options.get("tb", None)
       if __tb__ is not None:
         tb = __tb__._tb # type: ignore (we know how to use this private attribute)
@@ -95,7 +141,7 @@ class BamlStreamClient:
       __cr__ = baml_options.get("client_registry", None)
 
       raw = self.__runtime.stream_function_sync(
-        "X12Extractor",
+        "X12_835_5010_X221A1_Extractor",
         {
           "params": params,
         },
@@ -105,10 +151,70 @@ class BamlStreamClient:
         __cr__,
       )
 
-      return baml_py.BamlSyncStream[partial_types.X12Output, types.X12Output](
+      return baml_py.BamlSyncStream[partial_types.X12_835_5010_X221A1_Extractor_Output_V0, types.X12_835_5010_X221A1_Extractor_Output_V0](
         raw,
-        lambda x: cast(partial_types.X12Output, x.cast_to(types, partial_types)),
-        lambda x: cast(types.X12Output, x.cast_to(types, types)),
+        lambda x: cast(partial_types.X12_835_5010_X221A1_Extractor_Output_V0, x.cast_to(types, partial_types)),
+        lambda x: cast(types.X12_835_5010_X221A1_Extractor_Output_V0, x.cast_to(types, types)),
+        self.__ctx_manager.get(),
+      )
+    
+    def X12_835_5010_X221A1_Judge(
+        self,
+        params: types.X12_835_5010_X221A1_Judge_Input_V0,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlSyncStream[partial_types.X12_835_5010_X221A1_Judge_Output_V0, types.X12_835_5010_X221A1_Judge_Output_V0]:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      raw = self.__runtime.stream_function_sync(
+        "X12_835_5010_X221A1_Judge",
+        {
+          "params": params,
+        },
+        None,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+
+      return baml_py.BamlSyncStream[partial_types.X12_835_5010_X221A1_Judge_Output_V0, types.X12_835_5010_X221A1_Judge_Output_V0](
+        raw,
+        lambda x: cast(partial_types.X12_835_5010_X221A1_Judge_Output_V0, x.cast_to(types, partial_types)),
+        lambda x: cast(types.X12_835_5010_X221A1_Judge_Output_V0, x.cast_to(types, types)),
+        self.__ctx_manager.get(),
+      )
+    
+    def X12_835_5010_X221A1_Validator(
+        self,
+        params: types.X12_835_5010_X221A1_Validator_Input_V0,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlSyncStream[partial_types.X12_835_5010_X221A1_Validator_Output_V0, types.X12_835_5010_X221A1_Validator_Output_V0]:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      raw = self.__runtime.stream_function_sync(
+        "X12_835_5010_X221A1_Validator",
+        {
+          "params": params,
+        },
+        None,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+
+      return baml_py.BamlSyncStream[partial_types.X12_835_5010_X221A1_Validator_Output_V0, types.X12_835_5010_X221A1_Validator_Output_V0](
+        raw,
+        lambda x: cast(partial_types.X12_835_5010_X221A1_Validator_Output_V0, x.cast_to(types, partial_types)),
+        lambda x: cast(types.X12_835_5010_X221A1_Validator_Output_V0, x.cast_to(types, types)),
         self.__ctx_manager.get(),
       )
     

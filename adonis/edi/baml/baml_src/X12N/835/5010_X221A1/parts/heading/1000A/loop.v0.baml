@@ -1,0 +1,9 @@
+class X12_835_5010_X221A1_Heading_1000A_Loop_V0 {  
+    N1_payer_identification X12_835_5010_X221A1_Heading_1000A_N1_V0
+    N3_payer_address X12_835_5010_X221A1_Heading_1000A_N3_V0
+    N4_payer_city_state_zip_code X12_835_5010_X221A1_Heading_1000A_N4_V0
+    REF_additional_payer_identification X12_835_5010_X221A1_Heading_1000A_REF_V0[]
+    PER_payer_business_contact_information X12_835_5010_X221A1_Heading_1000A_PER_V0?
+    PER_payer_technical_contact_information X12_835_5010_X221A1_Heading_1000A_PER_V0[]
+    PER_payer_web_site X12_835_5010_X221A1_Heading_1000A_PER_V0?
+}

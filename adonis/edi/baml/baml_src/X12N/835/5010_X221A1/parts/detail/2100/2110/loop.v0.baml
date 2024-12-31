@@ -1,0 +1,12 @@
+class X12_835_5010_X221A1_Detail_2100_2110_Loop_V0 {
+    SVC_service_payment_information X12_835_5010_X221A1_Detail_2100_2110_SVC_V0
+    DTM_service_date X12_835_5010_X221A1_Detail_2100_2110_DTM_V0[]
+    CAS_service_adjustment X12_835_5010_X221A1_Detail_2100_2110_CAS_V0[]
+    REF_service_identification X12_835_5010_X221A1_Detail_2100_2110_REF_V0[]
+    REF_line_item_control_number X12_835_5010_X221A1_Detail_2100_2110_REF_V0?
+    REF_rendering_provider_information X12_835_5010_X221A1_Detail_2100_2110_REF_V0[]
+    REF_healthcare_policy_identification X12_835_5010_X221A1_Detail_2100_2110_REF_V0[]
+    AMT_service_supplemental_amount X12_835_5010_X221A1_Detail_2100_2110_AMT_V0[]
+    QTY_service_supplemental_quantity X12_835_5010_X221A1_Detail_2100_2110_QTY_V0[]
+    LQ_healthcare_remark_codes X12_835_5010_X221A1_Detail_2100_2110_LQ_V0[]
+}

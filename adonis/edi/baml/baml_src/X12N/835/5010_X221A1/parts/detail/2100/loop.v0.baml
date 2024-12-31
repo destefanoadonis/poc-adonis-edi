@@ -1,0 +1,22 @@
+class X12_835_5010_X221A1_Detail_2100_Loop_V0 { 
+    CLP_claim_payment_information X12_835_5010_X221A1_Detail_2100_CLP_V0
+    CAS_claim_adjustments X12_835_5010_X221A1_Detail_2100_CAS_V0[]
+    NM1_patient_name X12_835_5010_X221A1_Detail_2100_NM1_V0
+    NM1_insured_name X12_835_5010_X221A1_Detail_2100_NM1_V0?
+    NM1_corrected_patient_or_insured_name X12_835_5010_X221A1_Detail_2100_NM1_V0?
+    NM1_service_provider_name X12_835_5010_X221A1_Detail_2100_NM1_V0?
+    NM1_crossover_carrier_name X12_835_5010_X221A1_Detail_2100_NM1_V0?
+    NM1_corrected_priority_payer_name X12_835_5010_X221A1_Detail_2100_NM1_V0?
+    NM1_other_subscriber_name X12_835_5010_X221A1_Detail_2100_NM1_V0?
+    MIA_inpatient_adjudication_information X12_835_5010_X221A1_Detail_2100_MIA_V0?
+    MOA_outpatient_adjudication_information X12_835_5010_X221A1_Detail_2100_MOA_V0?
+    REF_other_claim_related_identification X12_835_5010_X221A1_Detail_2100_REF_V0[]
+    REF_rendering_provider_identification X12_835_5010_X221A1_Detail_2100_REF_V0[]
+    DTM_statement_from_to_date X12_835_5010_X221A1_Detail_2100_DTM_V0[]
+    DTM_coverage_expiration_date X12_835_5010_X221A1_Detail_2100_DTM_V0?
+    DTM_claim_received_date X12_835_5010_X221A1_Detail_2100_DTM_V0?
+    PER_claim_contact_information X12_835_5010_X221A1_Detail_2100_PER_V0[]
+    AMT_claim_supplemental_information X12_835_5010_X221A1_Detail_2100_AMT_V0[]
+    QTY_claim_supplemental_information_quantity X12_835_5010_X221A1_Detail_2100_QTY_V0[]
+    service_line_loop X12_835_5010_X221A1_Detail_2100_2110_Loop_V0[]
+}

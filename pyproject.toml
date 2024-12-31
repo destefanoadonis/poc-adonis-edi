@@ -1,5 +1,5 @@
 [project]
-name = "edi-processor"
+name = "adonis-edi"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -16,4 +16,6 @@ dependencies = [
     "torch>=2.5.1",
     "torchvision>=0.20.1",
     "pydantic-settings>=2.7.0",
+    "solara>=1.43.0",
+    "spacy-to-hf>=0.0.4",
 ]
