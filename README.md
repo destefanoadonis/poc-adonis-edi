@@ -820,7 +820,7 @@ Answer in JSON using this schema:
 }
 ```
 
-expected output 
+example output - would need prompt refinement for accuuracy but demonstrates point.
 
 ```json
 {
